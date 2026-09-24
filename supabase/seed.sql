@@ -1,0 +1,2 @@
+-- Keep local databases useful without assuming what a site or project represents.
+-- Sign-up creates the first workspace automatically; record fixtures live under /fixtures.

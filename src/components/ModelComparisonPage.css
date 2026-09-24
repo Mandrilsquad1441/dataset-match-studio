@@ -1,0 +1,36 @@
+.model-comparison-page {
+  max-width: 1040px;
+  color: #182e2b;
+  --j-ink: #182e2b;
+  --j-muted: #63716d;
+  --j-border: #e0e5e2;
+  --j-accent: #225e50;
+  --j-blue: #456f98;
+  --j-violet: #786599;
+}
+.comparison-page-heading { margin-bottom: 28px; }
+.comparison-page-heading h1 { margin: 0; font: 600 34px/1.18 "Manrope", sans-serif; letter-spacing: -.055em; }
+.comparison-page-heading p { margin: 10px 0 0; color: #63716d; font-size: 14px; line-height: 1.6; }
+.comparison-matching-notice { display: flex; align-items: center; gap: 9px; margin: 0 0 20px; padding: 12px 14px; background: #f0f4ed; border: 1px solid #dce5d8; border-radius: 8px; color: #4f6758; font-size: 12px; line-height: 1.6; }
+.comparison-matching-notice svg { flex-shrink: 0; }
+.comparison-dataset-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.comparison-dataset-summary { display: flex; align-items: center; gap: 12px; padding: 15px 17px; border: 1px solid #e0e5e2; border-radius: 10px; background: #fff; min-width: 0; }
+.comparison-dataset-summary > div { min-width: 0; }
+.comparison-dataset-icon { display: grid; place-items: center; flex-shrink: 0; width: 33px; height: 37px; background: #eef4fa; border: 1px solid #d4e1ed; border-radius: 7px; color: #456f98; }
+.comparison-dataset-summary[data-source="2"] .comparison-dataset-icon { background: #f4f0f8; border-color: #e1d9eb; color: #786599; }
+.comparison-dataset-label { display: block; color: #718078; font-size: 10.5px; margin-bottom: 4px; }
+.comparison-dataset-summary strong { display: block; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #2b4338; }
+.comparison-dataset-summary small { display: block; margin-top: 4px; color: #63716d; font-size: 11px; }
+.comparison-edit-datasets { display: flex; align-items: center; gap: 6px; padding: 8px 0; margin: 5px 0 0 auto; min-height: 32px; border: 0; background: transparent; color: #536c5e; font-size: 11.5px; cursor: pointer; }
+.comparison-edit-datasets svg.is-open { transform: rotate(180deg); }
+.comparison-edit-datasets:focus-visible { outline: 2px solid #588273; outline-offset: 3px; border-radius: 3px; }
+.comparison-source-inputs[hidden] { display: none; }
+.comparison-source-inputs.with-summary { margin-top: 10px; }
+.comparison-dataset-prompt { color: #718078; font-size: 12px; line-height: 1.7; margin: 18px 0 0; text-align: center; }
+@media (max-width: 760px) {
+  .comparison-page-heading h1 { font-size: 29px; }
+  .comparison-page-heading { margin-bottom: 23px; }
+  .comparison-page-heading p { font-size: 13px; }
+  .comparison-dataset-pair { gap: 10px; grid-template-columns: 1fr; }
+  .comparison-dataset-summary { padding: 12px 14px; }
+}

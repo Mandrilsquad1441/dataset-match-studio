@@ -1,0 +1,14 @@
+# Copy to .dev.vars for local Worker development. This template contains no keys.
+# Leave false for local browser-only work. Set true only with your own services.
+ALLOW_HOSTED_SERVICES=false
+ALLOW_PAID_MODEL_CALLS=false
+MODEL_ADAPTER_MODE=test
+
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+INTERNAL_JOB_SECRET=
+TRIGGER_SECRET_KEY=
+TRIGGER_TASK_ID=process-vendor-import
+TRIGGER_API_URL=https://api.trigger.dev
+OPENROUTER_API_KEY=

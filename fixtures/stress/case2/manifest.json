@@ -1,0 +1,240 @@
+{
+  "caseId": "case2",
+  "title": "Industrial catalog reconciliation",
+  "synthetic": true,
+  "generator": "scripts/stress/case2.ts",
+  "generatorVersion": 2,
+  "shuffleSeeds": {
+    "referenceRows": 706158630,
+    "incomingRows": 1804673062,
+    "incomingColumns": 1373839398
+  },
+  "dataset1": {
+    "file": "reference.xml",
+    "format": "xml",
+    "count": 10000,
+    "columns": 40,
+    "headers": [
+      "row_id",
+      "item_name",
+      "maker",
+      "mfr_part",
+      "series",
+      "category",
+      "kind",
+      "material",
+      "finish",
+      "length",
+      "width",
+      "height",
+      "dim_unit",
+      "mass",
+      "mass_unit",
+      "size",
+      "thread",
+      "volts",
+      "amps",
+      "watts",
+      "hz",
+      "phase",
+      "pressure",
+      "press_unit",
+      "seal",
+      "capacity",
+      "cap_unit",
+      "pack_qty",
+      "order_unit",
+      "currency",
+      "price",
+      "country",
+      "region",
+      "cert",
+      "revision",
+      "status",
+      "replaces",
+      "stock",
+      "lead_days",
+      "note"
+    ],
+    "nameField": "item_name",
+    "keyField": "row_id",
+    "idField": "mfr_part",
+    "bytes": 9285941,
+    "normalizedBytes": 6965882
+  },
+  "dataset2": {
+    "file": "incoming.jsonl",
+    "format": "jsonl",
+    "count": 10000,
+    "columns": 40,
+    "headers": [
+      "note",
+      "maker",
+      "dim_unit",
+      "status",
+      "pack_qty",
+      "series",
+      "height",
+      "price",
+      "cap_unit",
+      "mfr_part",
+      "mass",
+      "volts",
+      "cert",
+      "row_id",
+      "kind",
+      "width",
+      "length",
+      "material",
+      "order_unit",
+      "capacity",
+      "press_unit",
+      "thread",
+      "region",
+      "replaces",
+      "stock",
+      "phase",
+      "lead_days",
+      "amps",
+      "seal",
+      "finish",
+      "mass_unit",
+      "revision",
+      "size",
+      "currency",
+      "item_name",
+      "country",
+      "category",
+      "pressure",
+      "watts",
+      "hz"
+    ],
+    "nameField": "item_name",
+    "keyField": "row_id",
+    "idField": "mfr_part",
+    "bytes": 7027493,
+    "normalizedBytes": 7027494
+  },
+  "recommendedMapping": {
+    "dataset1": {
+      "nameField": "item_name",
+      "idField": null
+    },
+    "dataset2": {
+      "nameField": "item_name",
+      "idField": null
+    },
+    "reason": "Use names only for the primary stress run. Manufacturer codes are intentionally missing, duplicated or stale; row_id identifies fixture rows and is not a shared business identifier."
+  },
+  "truthFile": "truth.json",
+  "normalizedCombinedBytes": 13993536,
+  "expectedCounts": {
+    "match": 6000,
+    "no-match": 3000,
+    "ambiguous": 1000
+  },
+  "cohorts": [
+    {
+      "scenario": "exact_name",
+      "description": "Exact names and specifications; baseline controls.",
+      "rows": 500
+    },
+    {
+      "scenario": "reordered_name",
+      "description": "Same model and specification with reordered name tokens.",
+      "rows": 500
+    },
+    {
+      "scenario": "abbreviated_name",
+      "description": "Industrial abbreviations, short manufacturer names and condensed units.",
+      "rows": 500
+    },
+    {
+      "scenario": "translated_name",
+      "description": "German/French product vocabulary with preserved technical specifications.",
+      "rows": 500
+    },
+    {
+      "scenario": "unit_conversion",
+      "description": "Exact inch/mm, kilogram/gram and kPa/bar conversions; no physical change.",
+      "rows": 500
+    },
+    {
+      "scenario": "unicode_punctuation",
+      "description": "Curly punctuation, nonbreaking spaces, accented maker names and fullwidth characters.",
+      "rows": 500
+    },
+    {
+      "scenario": "typographical_errors",
+      "description": "Inserted/transposed letters in product vocabulary with preserved model data.",
+      "rows": 500
+    },
+    {
+      "scenario": "manufacturer_alias",
+      "description": "Brand/legal-name aliases and additional catalog wording.",
+      "rows": 500
+    },
+    {
+      "scenario": "identical_name_variants",
+      "description": "Different reference variants intentionally have the same display name; full spec identifies one.",
+      "rows": 500
+    },
+    {
+      "scenario": "missing_identifiers",
+      "description": "Incoming manufacturer part number is missing, while physical fields remain complete.",
+      "rows": 500
+    },
+    {
+      "scenario": "duplicate_codes",
+      "description": "Different physical variants intentionally reuse a manufacturer part code.",
+      "rows": 500
+    },
+    {
+      "scenario": "kit_vs_item",
+      "description": "A service kit resembles a reference item but is a different orderable product.",
+      "rows": 500
+    },
+    {
+      "scenario": "pack_quantity_conflict",
+      "description": "Same apparent item name with a different pack size; orderable SKU is not equivalent.",
+      "rows": 500
+    },
+    {
+      "scenario": "electrical_lookalike",
+      "description": "Similar or identical name but incompatible electrical rating.",
+      "rows": 500
+    },
+    {
+      "scenario": "superseded_revision",
+      "description": "A new revision supersedes a reference; related does not mean interchangeable.",
+      "rows": 500
+    },
+    {
+      "scenario": "novel_unmatched",
+      "description": "New manufacturers/model series and physical specs absent from the reference catalog.",
+      "rows": 500
+    },
+    {
+      "scenario": "dimension_lookalike",
+      "description": "Same family/model wording with an incompatible physical dimension.",
+      "rows": 500
+    },
+    {
+      "scenario": "ambiguous_missing_variant",
+      "description": "Variant-bearing fields and part code are omitted; either of two variants fits.",
+      "rows": 500
+    },
+    {
+      "scenario": "duplicate_reference_listing",
+      "description": "Two reference listings describe the same full physical product; choosing one row is ambiguous.",
+      "rows": 500
+    },
+    {
+      "scenario": "mixed_transformations",
+      "description": "Reordering, abbreviations, Unicode, missing code and changed measurement units together.",
+      "rows": 500
+    }
+  ],
+  "truthDefinition": "A match requires equality of the full canonical physical specification, including maker/model, dimensions, materials, electrical ratings, kit/item, packaging and revision. Equivalent measurement units do not change identity. Superseding revisions and kits are related but not equivalent. Missing variant details or duplicate equivalent reference listings are ambiguous.",
+  "measurements": "Canonical dimensions are mm, mass g and pressure bar. Displayed inch/kg/kPa values are exact conversions of canonical values."
+}

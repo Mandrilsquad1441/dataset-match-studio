@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.worker.json",
+  "include": [
+    "../../worker-configuration.d.ts",
+    "src/**/*.ts",
+    "../../src/lib/types.ts",
+    "../../src/lib/normalize.ts",
+    "../../src/lib/matching.ts",
+    "../../src/lib/evidence.ts"
+  ]
+}

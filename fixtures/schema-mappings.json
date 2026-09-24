@@ -1,0 +1,41 @@
+[
+  {
+    "vendor": "Northstar Data Co.",
+    "file": "vendor-northstar.csv",
+    "recordType": "site",
+    "version": 1,
+    "fieldMap": {
+      "display_name": "facility_label",
+      "external_record_id": "source_id",
+      "identifiers.registry": "registry_ref",
+      "country": "country",
+      "status": "operational_state"
+    }
+  },
+  {
+    "vendor": "Cedarline Partners",
+    "file": "vendor-cedarline.json",
+    "recordType": "project",
+    "version": 1,
+    "fieldMap": {
+      "display_name": "shortTitle",
+      "external_record_id": "projectRef",
+      "identifiers.registry": "projectRef",
+      "program": "programName",
+      "status": "stage"
+    }
+  },
+  {
+    "vendor": "Vantage Registry",
+    "file": "vendor-vantage.csv",
+    "recordType": "site",
+    "version": 1,
+    "fieldMap": {
+      "display_name": "SiteLabel",
+      "external_record_id": "VendorUID",
+      "identifiers.registry": "Identifier",
+      "country": "Geography",
+      "status": "OperationalFlag"
+    }
+  }
+]

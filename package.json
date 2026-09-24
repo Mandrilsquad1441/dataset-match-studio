@@ -1,0 +1,59 @@
+{
+  "name": "dataset-match-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "api:dev": "wrangler dev --port 8787",
+    "build": "tsc -b && vite build",
+    "build:worker": "wrangler deploy --dry-run --outdir .worker-build",
+    "deploy:worker": "wrangler deploy",
+    "typecheck:worker": "tsc -p apps/api/tsconfig.json --noEmit",
+    "typecheck:jobs": "tsc -p trigger/tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "evaluate": "tsx scripts/evaluate.ts",
+    "trigger:dev": "trigger dev",
+    "trigger:deploy": "trigger deploy",
+    "db:test": "supabase test db"
+  },
+  "dependencies": {
+    "@streamparser/json": "^0.0.26",
+    "@supabase/supabase-js": "^2.57.0",
+    "@trigger.dev/sdk": "4.6.4",
+    "csv-parse": "^7.0.2",
+    "exceljs": "^4.4.0",
+    "hono": "^4.9.0",
+    "lucide-react": "^0.468.0",
+    "papaparse": "^5.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "saxes": "^5.0.1",
+    "stream-chain": "4.2.5",
+    "stream-json": "^3.7.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260923.1",
+    "@trigger.dev/build": "4.6.4",
+    "@types/node": "^24.3.0",
+    "@types/papaparse": "^5.3.16",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "supabase": "^2.117.0",
+    "trigger.dev": "4.6.4",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^5.0.1",
+    "wrangler": "^4.38.0"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "^11.1.1"
+    },
+    "ws": "^8.21.0"
+  }
+}

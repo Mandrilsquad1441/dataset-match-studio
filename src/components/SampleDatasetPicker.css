@@ -1,0 +1,43 @@
+.sample-picker { width: 100%; min-width: 0; margin-bottom: 18px; color: #182e2b; }
+.sample-picker-disclosure > summary { display: flex; align-items: center; gap: 7px; width: fit-content; padding: 8px 10px; border: 1px solid #dce5df; border-radius: 7px; background: #fff; color: #38574c; list-style: none; cursor: pointer; font-size: 12px; font-weight: 550; line-height: 17px; user-select: none; transition: background-color 160ms ease, border-color 160ms ease; }
+.sample-picker-disclosure > summary::-webkit-details-marker { display: none; }
+.sample-picker-disclosure > summary:hover { background: #f6f9f6; border-color: #c7d7ce; }
+.sample-picker-chevron { color: #7c8a82; margin-left: 5px; transition: transform 180ms ease; }
+.sample-picker-disclosure[open] > summary { background: #f3f7f3; border-color: #cbd9d0; }
+.sample-picker-disclosure[open] .sample-picker-chevron { transform: rotate(180deg); }
+.sample-picker-content { margin-top: 10px; padding: 4px; border: 1px solid #e0e7e2; border-radius: 10px; background: #fbfcfa; }
+.sample-picker-list { display: grid; gap: 3px; }
+.sample-picker-option { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-width: 0; padding: 12px 13px; text-align: left; border: 1px solid transparent; border-radius: 7px; background: transparent; color: inherit; font: inherit; cursor: pointer; transition: background-color 160ms ease, border-color 160ms ease; }
+.sample-picker-option + .sample-picker-option { border-top-color: #e7ece7; }
+.sample-picker-option:hover:not(:disabled) { border-color: #d5e0d9; background: #fff; }
+.sample-picker-option.is-selected { border-color: #d0dfd5; background: #f4f8f3; }
+.sample-picker-option.is-loading { border-color: #cfded7; background: #fff; }
+.sample-picker-option:disabled { cursor: default; }
+.sample-picker-option:disabled:not(.is-loading) { opacity: .55; }
+.sample-picker-copy { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; gap: 6px; }
+.sample-picker-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; line-height: 1.5; }
+.sample-picker-title strong { font-size: 12px; font-weight: 600; color: #203e32; }
+.sample-picker-selected { display: inline-flex; align-items: center; gap: 3px; color: #507661; font-size: 10px; font-weight: 500; }
+.sample-picker-metadata { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; color: #78867d; font-size: 10.5px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+.sample-picker-metadata b { font-weight: 550; }
+.sample-picker-source { display: inline-flex; align-items: center; gap: 5px; color: #5d6f68; }
+.sample-picker-source::before { content: ""; width: 5px; height: 5px; border-radius: 1px; background: #456f98; }
+.sample-picker-source.source-two::before { background: #786599; }
+.sample-picker-description { color: #66766d; font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
+.sample-picker-action { flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px; color: #32604b; font-size: 11px; font-weight: 550; white-space: nowrap; }
+.sample-picker-spinner { animation: sample-picker-spin 900ms linear infinite; }
+.sample-picker-note { margin: 7px 13px 9px; color: #7b8880; font-size: 10px; line-height: 1.5; }
+.sample-picker-error { margin: 9px 0 0; color: #a24f40; background: #fcf3ef; border: 1px solid #f0dfd7; border-radius: 7px; padding: 9px 11px; font-size: 11.5px; line-height: 1.6; overflow-wrap: anywhere; }
+.sample-picker-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.sample-picker-disclosure > summary:focus-visible, .sample-picker-option:focus-visible { outline: 2px solid #588273; outline-offset: 3px; }
+@keyframes sample-picker-spin { to { transform: rotate(360deg); } }
+@media (max-width: 520px) {
+  .sample-picker-option { gap: 12px; padding: 11px 10px; }
+  .sample-picker-action > span { display: none; }
+  .sample-picker-metadata { gap: 3px 9px; font-size: 10px; }
+  .sample-picker-description { font-size: 10.5px; }
+  .sample-picker-note { margin-left: 10px; margin-right: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sample-picker *, .sample-picker *::before { animation: none !important; transition: none !important; }
+}

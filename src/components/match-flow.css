@@ -1,0 +1,118 @@
+.match-flow {
+  --mf-node: 9px;
+  --mf-gap: 7px;
+  --mf-ink: #182e2b;
+  --mf-muted: #63716d;
+  --mf-blue: #456f98;
+  --mf-violet: #786599;
+  --mf-source-size: 8px;
+  --mf-source-gap: 10px;
+  width: 100%;
+  max-width: 820px;
+  margin: 8px auto 4px;
+  padding: 8px 6px 0;
+  box-sizing: border-box;
+  container-type: inline-size;
+}
+
+.mf-labels, .mf-captions { display: grid; grid-template-columns: 26% 48% 26%; text-align: center; }
+.mf-labels { color: var(--mf-ink); font-size: 11px; line-height: 18px; font-weight: 650; letter-spacing: .01em; }
+.mf-labels > span { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.mf-labels > :first-child::before, .mf-labels > :last-child::before { content: ""; width: 6px; height: 6px; border-radius: 1.5px; background: var(--mf-blue); }
+.mf-labels > :last-child::before { background: var(--mf-violet); }
+.mf-labels > :nth-child(2) { color: #225e50; }
+.mf-stage { position: relative; height: 160px; isolation: isolate; }
+
+.mf-bucket {
+  position: absolute;
+  top: 48px;
+  bottom: 12px;
+  width: 26%;
+  border: 1px solid #afc3d7;
+  border-top: 0;
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(180deg, rgb(238 244 250 / 0%) 0%, #eef4fa 100%);
+  box-shadow: inset 0 -5px 10px rgb(255 255 255 / 45%), 0 3px 0 -1px rgb(24 46 43 / 3%);
+  box-sizing: border-box;
+}
+.mf-bucket::after { content: ""; position: absolute; inset: auto 8px 3px; height: 5px; border-bottom: 1px solid rgb(255 255 255 / 85%); border-radius: 0 0 9px 9px; pointer-events: none; }
+.mf-bucket-left { left: 0; --mf-source-color: var(--mf-blue); }
+.mf-bucket-right { right: 0; --mf-source-color: var(--mf-violet); border-color: #c0b2d1; background: linear-gradient(180deg, rgb(244 240 248 / 0%) 0%, #f4f0f8 100%); }
+.mf-bucket-result { top: 60px; left: 36%; width: 28%; border-color: #97b3a5; background: linear-gradient(180deg, rgb(255 255 255 / 0%), #f0f6f2 100%); transition: border-color 350ms ease; }
+.mf-bucket-lip { position: absolute; top: -2px; width: 3px; height: 3px; border-radius: 1px; background: #8caac6; }
+.mf-bucket-lip.lip-left { left: -2px; }
+.mf-bucket-lip.lip-right { right: -2px; }
+.mf-bucket-right .mf-bucket-lip { background: #ad9ac3; }
+.mf-bucket-result .mf-bucket-lip { background: #739984; }
+.match-flow.is-complete .mf-bucket-result { border-color: #7ca38d; }
+
+.mf-source-grid { display: grid; grid-template-columns: repeat(3, var(--mf-source-size)); grid-auto-rows: var(--mf-source-size); gap: var(--mf-source-gap); position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); }
+.mf-source-square { width: var(--mf-source-size); height: var(--mf-source-size); border-radius: 1.7px; background: var(--mf-source-color); box-shadow: inset 0 -1px 0 rgb(24 46 43 / 10%), 0 1px 0 rgb(255 255 255 / 85%); transition: opacity 420ms ease; }
+.mf-source-square:nth-child(3n + 2) { opacity: .72; }
+.mf-source-square.is-departing { opacity: .38; }
+.mf-source-square.is-checked { opacity: .22; box-shadow: none; }
+
+.mf-result-grid { display: grid; grid-template-columns: repeat(4, var(--mf-node)); grid-template-rows: repeat(3, var(--mf-node)); gap: var(--mf-gap); position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); }
+.mf-result-slot { display: block; width: var(--mf-node); height: var(--mf-node); position: relative; }
+.mf-result-square, .mf-record-drop { display: block; width: var(--mf-node); height: var(--mf-node); border-radius: 1.7px; background: var(--mf-outcome); border: 1px solid transparent; box-sizing: border-box; box-shadow: inset 0 -1px 0 rgb(24 46 43 / 12%), 0 1px 0 rgb(255 255 255 / 85%); }
+.mf-result-square { position: absolute; inset: 0; transition: opacity 200ms ease, background-color 360ms ease, border-color 360ms ease; }
+.match-flow .strong { --mf-outcome: #398265; }
+.match-flow .review { --mf-outcome: #b88632; }
+.match-flow .low, .match-flow .no-match { --mf-outcome: #84909c; }
+.mf-result-square.no-match, .mf-record-drop.no-match { background: #fff; border-color: #84909c; box-shadow: 0 1px 0 rgb(255 255 255 / 85%); }
+.mf-result-square.is-pending { opacity: 0; }
+
+/* Paths use the measured grid coordinates. The browser advances them without
+   changing layout or scheduling a React render for each animation frame. */
+.mf-flights, .mf-flight { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.mf-particle, .mf-record-drop { position: absolute; top: 0; left: 0; offset-position: 0 0; offset-anchor: 50% 50%; offset-rotate: 0deg; will-change: offset-distance, transform, opacity; }
+.mf-particle { width: var(--mf-source-size); height: var(--mf-source-size); display: block; border: 1px solid transparent; box-sizing: border-box; border-radius: 1.7px; opacity: 0; box-shadow: 0 0 0 2px rgb(255 255 255 / 75%), 0 2px 3px rgb(24 46 43 / 9%); animation: mf-approach 660ms cubic-bezier(.32, .04, .24, 1) both; }
+.mf-particle-left { --mf-tilt: -6deg; background: var(--mf-blue); offset-path: var(--mf-left-path); }
+.mf-particle-right { --mf-tilt: 6deg; background: var(--mf-violet); offset-path: var(--mf-right-path); }
+.mf-flight.no-match .mf-particle-right { animation-name: mf-approach-unmatched; }
+.mf-record-drop { offset-path: var(--mf-drop-path); animation: mf-resolve 400ms cubic-bezier(.24, .65, .36, 1) 620ms both; }
+.mf-flight::before { content: ""; position: absolute; top: var(--mf-join-y); left: var(--mf-join-x); width: 13px; height: 13px; margin: -6.5px; border: 1px solid var(--mf-outcome); border-radius: 4px; box-sizing: border-box; opacity: 0; animation: mf-converge 290ms ease-out 560ms both; }
+.mf-flight.no-match::before { display: none; }
+.mf-flight::after { content: ""; position: absolute; top: var(--mf-land-y); left: var(--mf-land-x); width: 21px; height: 5px; margin: 4px 0 0 -10.5px; border-radius: 50%; background: var(--mf-outcome); opacity: 0; filter: blur(3px); animation: mf-settle 260ms ease-out 800ms both; }
+.match-flow.is-paused .mf-flight *, .match-flow.is-paused .mf-flight::before, .match-flow.is-paused .mf-flight::after { animation-play-state: paused; }
+
+.mf-captions { font-size: 10px; line-height: 16px; color: var(--mf-muted); }
+.mf-captions > div { min-width: 0; display: flex; flex-direction: column; align-items: stretch; }
+.mf-captions strong { min-width: 0; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #314640; }
+.mf-captions span { font-variant-numeric: tabular-nums; }
+
+@keyframes mf-approach {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.86) rotate(var(--mf-tilt)); }
+  12% { opacity: 1; }
+  82% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(.5) rotate(0deg); }
+}
+@keyframes mf-approach-unmatched {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.86) rotate(var(--mf-tilt)); background: var(--mf-violet); border-color: transparent; }
+  12% { opacity: 1; }
+  70% { background: var(--mf-violet); border-color: transparent; }
+  85% { opacity: 1; transform: scale(1) rotate(0deg); background: #fff; border-color: #84909c; }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(.85) rotate(0deg); background: #fff; border-color: #84909c; }
+}
+@keyframes mf-resolve {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.78); }
+  12% { opacity: 1; }
+  76% { offset-distance: 100%; opacity: 1; transform: scale(1.09, .92); }
+  100% { offset-distance: 100%; opacity: 1; transform: scale(1); }
+}
+@keyframes mf-converge { 0% { opacity: 0; transform: scale(.45); } 35% { opacity: .34; } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes mf-settle { 0% { opacity: 0; transform: scaleX(.5); } 40% { opacity: .2; } 100% { opacity: 0; transform: scaleX(1); } }
+
+@container (max-width: 350px) {
+  .mf-stage { --mf-source-size: 7px; --mf-source-gap: 8px; --mf-node: 8px; --mf-gap: 6px; height: 148px; }
+  .mf-bucket { top: 43px; border-radius: 0 0 10px 10px; }
+  .mf-bucket-result { top: 55px; }
+  .mf-captions { font-size: 9px; }
+}
+
+.match-flow.is-static .mf-flights { display: none; }
+.match-flow.is-static .mf-result-square { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .match-flow *, .match-flow *::before, .match-flow *::after { animation: none !important; transition: none !important; }
+  .mf-flights { display: none; }
+}
